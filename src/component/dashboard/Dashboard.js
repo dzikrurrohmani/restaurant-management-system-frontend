@@ -9,47 +9,62 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: <Welcome menuView={this.menuView} tableView={this.tableView} />,
+      view: 1,
     };
   }
 
   welcomeView = () => {
     this.setState({
-      view: <Welcome menuView={this.menuView} tableView={this.tableView} />,
+      view: 1,
     });
   };
   menuView = () => {
+    console.log('setstate view');
     this.setState({
-      view: (
-        <Menu
-          stateKey="menuList"
-          menuList={this.props.menuList}
-          handleSubmit={this.props.handleSubmit}
-          handleDelete={this.props.handleDelete}
-          menuView= {this.menuView}
-          render={MenuView}
-        />
-      ),
+      view: 2,
     });
   };
   tableView = () => {
     this.setState({
-      view: (
-        <Table
-          stateKey="tableList"
-          tableList={this.props.tableList}
-          handleSubmit={this.props.handleSubmit}
-          handleDelete={this.props.handleDelete}
-          tableView= {this.tableView}
-          render={TableView}
-        />
-      ),
+      view: 3,
     });
   };
 
   render() {
+    let tampil;
+    switch (this.state.view) {
+      case 2:
+        tampil = (
+          <Menu
+            stateKey="menuList"
+            menuList={this.props.menuList}
+            handleSubmit={this.props.handleSubmit}
+            handleDelete={this.props.handleDelete}
+            menuView={this.menuView}
+            render={MenuView}
+          />
+        );
+        break;
+      case 3:
+        tampil = (
+          <Table
+            stateKey="tableList"
+            tableList={this.props.tableList}
+            handleSubmit={this.props.handleSubmit}
+            handleDelete={this.props.handleDelete}
+            tableView={this.tableView}
+            render={TableView}
+          />
+        );
+        break;
+      default:
+        tampil = (
+          <Welcome menuView={this.menuView} tableView={this.tableView} />
+        );
+        break;
+    }
     return this.props.render({
-      view: this.state.view,
+      view: tampil,
       welcomeView: this.welcomeView,
       menuView: this.menuView,
       tableView: this.tableView,
