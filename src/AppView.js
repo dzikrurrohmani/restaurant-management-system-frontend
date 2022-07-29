@@ -5,7 +5,7 @@ import Login from './component/feature/login/Login';
 import LoginView from './component/feature/login/LoginView';
 
 export default function AppView(props) {
-  const { tableList, menuList, isActive, handleSubmit, handleLog } = props;
+  const { tableList, menuList, isActive, handleSubmit, handleDelete, handleLog } = props;
   return (
     <div className="App">
       {isActive ? (
@@ -14,6 +14,7 @@ export default function AppView(props) {
           tableList={tableList}
           menuList={menuList}
           handleSubmit={handleSubmit}
+          handleDelete={handleDelete}
           handleLog={handleLog}
         />
       ) : (

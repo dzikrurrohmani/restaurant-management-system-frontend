@@ -9,13 +9,13 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: <Welcome />,
+      view: <Welcome menuView={this.menuView} tableView={this.tableView} />,
     };
   }
 
   welcomeView = () => {
     this.setState({
-      view: <Welcome />,
+      view: <Welcome menuView={this.menuView} tableView={this.tableView} />,
     });
   };
   menuView = () => {
@@ -25,6 +25,8 @@ export default class Dashboard extends Component {
           stateKey="menuList"
           menuList={this.props.menuList}
           handleSubmit={this.props.handleSubmit}
+          handleDelete={this.props.handleDelete}
+          menuView= {this.menuView}
           render={MenuView}
         />
       ),
@@ -37,6 +39,8 @@ export default class Dashboard extends Component {
           stateKey="tableList"
           tableList={this.props.tableList}
           handleSubmit={this.props.handleSubmit}
+          handleDelete={this.props.handleDelete}
+          tableView= {this.tableView}
           render={TableView}
         />
       ),

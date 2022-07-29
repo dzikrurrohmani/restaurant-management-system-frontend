@@ -7,9 +7,9 @@ const Menus = [
 ];
 
 const Tables = [
-  { id: 'T001', nomor: 'Nasi Goreng', availability: true },
-  { id: 'T002', nomor: 'Nasi Padang', availability: true },
-  { id: 'T003', nomor: 'Nasi Rames', availability: true },
+  { id: 'T001', availability: true },
+  { id: 'T002', availability: true },
+  { id: 'T003', availability: true },
 ];
 export default class App extends Component {
   constructor(props) {
@@ -17,21 +17,47 @@ export default class App extends Component {
     this.state = {
       tableList: Tables,
       menuList: Menus,
-      isActive: false,
+      isActive: true, // seharusnya false, untuk keperluan development
     };
   }
 
   handleSubmit = (key, value) => {
-    let newList = [...this.state.key, value];
+    console.log(value);
     this.setState({
-      [key]: newList,
+      [key]: value,
     });
   };
 
-  handleLog = (state=false) => {
+  handleLog = (state = false) => {
     this.setState({
       isActive: state,
     });
+  };
+
+  handleDelete = (key, index) => {
+    if (key === 'menu') {
+      const confirmation = window.confirm(
+        `apakah anda yakin ingin menghapus menu dengan id ${this.state.menuList[index].id}`
+      );
+      if (confirmation) {
+        let Menus = this.state.menuList;
+        Menus.splice(index, 1);
+        this.setState({
+          menuList: Menus,
+        });
+      }
+    } else {
+      const confirmation = window.confirm(
+        `apakah anda yakin ingin menghapus table dengan id ${this.state.tableList[index].id}`
+      );
+      if (confirmation) {
+        let Tables = this.state.tableList;
+        Tables.splice(index, 1);
+        this.setState({
+          tableList: Tables,
+        });
+      }
+    }
   };
 
   render() {
@@ -40,6 +66,7 @@ export default class App extends Component {
       menuList: this.state.menuList,
       isActive: this.state.isActive,
       handleSubmit: this.handleSubmit,
+      handleDelete: this.handleDelete,
       handleLog: this.handleLog,
     });
   }

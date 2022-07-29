@@ -6,35 +6,47 @@ export default class Login extends Component {
     this.state = {
       unameInput: '',
       paswdInput: '',
-      unameValid: false,
-      paswdValid: false,
+      unameValid: true,
+      paswdValid: true,
+      buttonOn: false,
     };
   }
 
-  logChange = (key, value, validate) => {
-    console.log(1);
+  logChange = (key, value) => {
+    if (!this.state.buttonOn) {
+      this.setState({
+        buttonOn: true,
+      });
+    }
     this.setState({
       [key]: value,
     });
-    validate();
+    key === 'unameInput' ? this.unameValidate() : this.paswdValidate();
   };
 
-  paswdValidate = () => {
+  unameValidate = () => {
     if (
-      !/^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+.([A-Za-z]{2,4})$/.test(
-        this.state.unameInput
+        this.state.unameInput.match(/^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/)
       )
-    ) {
+    {
       this.setState({
         unameValid: true,
+      });
+    } else {
+      this.setState({
+        unameValid: false,
       });
     }
   };
 
-  unameValidate = () => {
+  paswdValidate = () => {
     if (this.state.paswdInput.length > 6) {
       this.setState({
         paswdValid: true,
+      });
+    } else {
+      this.setState({
+        paswdValid: false,
       });
     }
   };
@@ -56,8 +68,7 @@ export default class Login extends Component {
     return this.props.render({
       unameValid: this.state.unameValid,
       paswdValid: this.state.paswdValid,
-      unameValidate: this.state.unameValidate,
-      paswdValidate: this.state.paswdValidate,
+      buttonOn: this.state.buttonOn,
       logChange: this.logChange,
       logSubmit: this.logSubmit,
     });

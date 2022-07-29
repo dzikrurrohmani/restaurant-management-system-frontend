@@ -1,14 +1,7 @@
-import './Login.css';
+import './LoginView.css';
 
 export default function LoginView(props) {
-  const {
-    unameValid,
-    paswdValid,
-    unameValidate,
-    paswdValidate,
-    logChange,
-    logSubmit,
-  } = props;
+  const { unameValid, paswdValid, logChange, logSubmit, buttonOn } = props;
   return (
     <>
       <div
@@ -31,14 +24,14 @@ export default function LoginView(props) {
               name="username"
               id="username"
               placeholder="enter your email"
-              onChange={((event) =>
-                logChange('unameInput', event.target.value, (()=>unameValidate)))
-              }
+              onChange={(event) => logChange('unameInput', event.target.value)}
             />
             {unameValid ? (
-              <h4 style={{ color: 'red' }}>email format isn't valid</h4>
+              <h4 style={{ color: 'bisque', fontSize: '10px' }}>1</h4>
             ) : (
-              <h4>&nbsp;</h4>
+              <p style={{ color: 'red', fontSize: '10px' }}>
+                email format isn't valid
+              </p>
             )}
           </div>
           <div>
@@ -50,23 +43,21 @@ export default function LoginView(props) {
               name="password"
               id="password"
               placeholder="enter your password"
-              onChange={((event) =>
-                logChange('paswdInput', event.target.value, paswdValidate))
-              }
+              onChange={(event) => logChange('paswdInput', event.target.value)}
             />
             {paswdValid ? (
-              <h4 style={{ color: 'red' }}>
-                password must have at least 6 character
-              </h4>
+              <p style={{ color: 'bisque', fontSize: '10px' }}>1</p>
             ) : (
-              <h4>&nbsp;</h4>
+              <p style={{ color: 'red', fontSize: '10px' }}>
+                password must have at least 6 character
+              </p>
             )}
           </div>
           <button
             className="html_button"
             type="submit"
-            onSubmit={logSubmit}
-            disabled={unameValid && paswdValid ? false : true}
+            onClick={logSubmit}
+            disabled={unameValid && paswdValid && buttonOn ? false : true}
           >
             Login
           </button>

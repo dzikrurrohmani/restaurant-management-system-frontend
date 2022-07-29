@@ -15,7 +15,7 @@ export default function HeaderComponent(props) {
             WMB
           </NavbarBS.Brand> */}
           <Nav.Link style={{ color: 'white' }} onClick={welcomeView}>
-            WMB  (Warung Makan Bahari)
+            WMB (Warung Makan Bahari)
           </Nav.Link>
           <Container style={{ marginRight: 'initial', width: 'max-content' }}>
             <NavbarBS.Toggle aria-controls="basic-navbar-nav"></NavbarBS.Toggle>
@@ -36,7 +36,7 @@ export default function HeaderComponent(props) {
                     Restart
                   </NavDropdown.Item>
                   <NavDropdown.Item>Preferences</NavDropdown.Item>
-                  <NavDropdown.Item onClick={props.handleLog}>
+                  <NavDropdown.Item onClick={() => props.handleLog(false)}>
                     Log Out
                   </NavDropdown.Item>
                 </NavDropdown>

@@ -4,21 +4,51 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newTable: '',
+      id: '',
+      availability: '',
       isSubmitting: false,
     };
   }
 
-  onChange = (event) => {
+  onChange = (key, value) => {
     this.setState({
-      newTable: event.target.value,
+      [key]: value,
+    });
+  };
+
+  onSubmitting = (value) => {
+    this.setState({
+      isSubmitting: value,
+    });
+  };
+
+  onSubmit = () => {
+    console.log(1);
+    let newTable = {
+      id: this.state.id,
+      availability: this.state.availability === 'true' ? true : false,
+    };
+    this.props.handleSubmit(this.props.stateKey, [
+      ...this.props.tableList,
+      newTable,
+    ]);
+    this.setState({
+      isSubmitting: false,
+      id: this.state.id,
+      availability: this.state.availability,
     });
   };
 
   render() {
     return this.props.render({
-      newTable: this.state.newTable,
-      onChange: this.onChange
+      id: this.state.id,
+      availability: this.state.availability,
+      tableList: this.props.tableList,
+      handleDelete: this.props.handleDelete,
+      isSubmitting: this.state.isSubmitting,
+      onSubmitting: this.onSubmitting,
+      onSubmit: this.onSubmit,
+      onChange: this.onChange,
     });
   }
 }
