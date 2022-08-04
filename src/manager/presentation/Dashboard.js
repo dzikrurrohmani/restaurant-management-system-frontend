@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import Menu from '../feature/menu/Menu';
-import MenuView from '../feature/menu/MenuView';
-import Table from '../feature/table/Table';
-import TableView from '../feature/table/TableView';
-import Welcome from '../feature/welcome/Welcome';
+import Menu from '../../features/menu/Menu';
+import MenuView from '../../features/menu/MenuView';
+import Table from '../../features/table/Table';
+import TableView from '../../features/table/TableView';
+import Welcome from '../../features/welcome/Welcome';
 
 export default class Dashboard extends Component {
   constructor(props) {

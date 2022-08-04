@@ -1,13 +1,14 @@
-import InputForm from "../../shared/InputForm";
+import InputForm from '../../shared/InputForm';
 
-export default function MenuView(props) {
+export default function TableView(props) {
   if (props.isSubmitting) {
     return (
-      <div className="container-lg">
-        <h1>Form Add Menu</h1>
+      <div
+      className="container-lg">
+        <h1>Form Add Table</h1>
         <div>
           <InputForm
-            label="ID Menu"
+            label="ID Meja"
             type="text"
             value={props.id}
             placeholder="masukkan id"
@@ -15,23 +16,17 @@ export default function MenuView(props) {
             onChange={props.onChange}
           />
           <InputForm
-            label="Nama Menu"
+            label="Ketersediaan"
             type="text"
-            value={props.name}
-            placeholder="masukkan nama"
-            id="name"
-            onChange={props.onChange}
-          />
-          <InputForm
-            label="Harga"
-            type="text"
-            value={props.harga}
-            placeholder="masukkan harga"
-            id="harga"
+            value={props.status}
+            placeholder="masukkan ketersediaan"
+            id="status"
             onChange={props.onChange}
           />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
+        <div
+          style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}
+        >
           <button type="button" class="btn btn-warning" onClick={props.onSubmit}>
             Submit
           </button>
@@ -44,7 +39,7 @@ export default function MenuView(props) {
   } else {
     return (
       <div className="container-lg">
-        <h1>Daftar Menu</h1>
+        <h1>Daftar Table</h1>
         <div
           className="container-lg"
           style={{ display: 'flex', marginBottom: '20px' }}
@@ -54,35 +49,35 @@ export default function MenuView(props) {
             className="btn btn-primary"
             onClick={() => props.onSubmitting(true)}
           >
-            Add Menu
+            Add Table
           </button>
         </div>
-        {props.menuList.length ? (
+        {props.tableList.length ? (
           <table className="table table-striped mt-4">
             <thead>
               <tr>
                 <th>No</th>
                 <th>ID</th>
-                <th>Nama</th>
-                <th>Harga</th>
+                <th>Table Number</th>
+                <th>Status</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
-              {props.menuList.map((menu, index) => {
+              {props.tableList.map((table, index) => {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{menu.id}</td>
-                    <td>{menu.name}</td>
-                    <td>{menu.harga}</td>
+                    <td>{table.id}</td>
+                    <td>{table.number}</td>
+                    <td>
+                      {table.status ? 'AVAILABLE' : 'NOT AVAILABILE'}
+                    </td>
                     <td>
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => {
-                          props.handleDelete('menu', index);
-                        }}
+                        onClick={() => props.handleDelete('table', index)}
                       >
                         Delete
                       </button>
@@ -93,7 +88,7 @@ export default function MenuView(props) {
             </tbody>
           </table>
         ) : (
-          <h3>Tidak ada menu yang tersedia</h3>
+          <h3>Tidak ada table yang tersedia</h3>
         )}
       </div>
     );

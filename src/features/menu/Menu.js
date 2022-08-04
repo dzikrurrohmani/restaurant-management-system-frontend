@@ -1,11 +1,12 @@
 import { Component } from 'react';
 
-export default class Table extends Component {
+export default class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: '',
-      availability: '',
+      name: '',
+      price: '',
       isSubmitting: false,
     };
   }
@@ -24,26 +25,29 @@ export default class Table extends Component {
 
   onSubmit = () => {
     console.log(1);
-    let newTable = {
+    let newMenu = {
       id: this.state.id,
-      availability: this.state.availability === 'true' ? true : false,
+      name: this.state.name,
+      price: this.state.price,
     };
     this.props.handleSubmit(this.props.stateKey, [
-      ...this.props.tableList,
-      newTable,
+      ...this.props.menuList,
+      newMenu,
     ]);
     this.setState({
       isSubmitting: false,
       id: this.state.id,
-      availability: this.state.availability,
+      name: this.state.name,
+      price: this.state.price,
     });
   };
 
   render() {
     return this.props.render({
       id: this.state.id,
-      availability: this.state.availability,
-      tableList: this.props.tableList,
+      name: this.state.name,
+      price: this.state.price,
+      menuList: this.props.menuList,
       handleDelete: this.props.handleDelete,
       isSubmitting: this.state.isSubmitting,
       onSubmitting: this.onSubmitting,

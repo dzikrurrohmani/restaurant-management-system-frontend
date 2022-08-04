@@ -1,14 +1,13 @@
-import InputForm from '../../shared/InputForm';
+import InputForm from "../../shared/InputForm";
 
-export default function TableView(props) {
+export default function MenuView(props) {
   if (props.isSubmitting) {
     return (
-      <div
-      className="container-lg">
-        <h1>Form Add Table</h1>
+      <div className="container-lg">
+        <h1>Form Add Menu</h1>
         <div>
           <InputForm
-            label="ID Meja"
+            label="ID Menu"
             type="text"
             value={props.id}
             placeholder="masukkan id"
@@ -16,17 +15,23 @@ export default function TableView(props) {
             onChange={props.onChange}
           />
           <InputForm
-            label="Ketersediaan"
+            label="Nama Menu"
             type="text"
-            value={props.availability}
-            placeholder="masukkan ketersediaan"
-            id="availability"
+            value={props.name}
+            placeholder="masukkan nama"
+            id="name"
+            onChange={props.onChange}
+          />
+          <InputForm
+            label="price"
+            type="text"
+            value={props.price}
+            placeholder="masukkan price"
+            id="price"
             onChange={props.onChange}
           />
         </div>
-        <div
-          style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}
-        >
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
           <button type="button" class="btn btn-warning" onClick={props.onSubmit}>
             Submit
           </button>
@@ -39,7 +44,7 @@ export default function TableView(props) {
   } else {
     return (
       <div className="container-lg">
-        <h1>Daftar Table</h1>
+        <h1>Daftar Menu</h1>
         <div
           className="container-lg"
           style={{ display: 'flex', marginBottom: '20px' }}
@@ -49,33 +54,35 @@ export default function TableView(props) {
             className="btn btn-primary"
             onClick={() => props.onSubmitting(true)}
           >
-            Add Table
+            Add Menu
           </button>
         </div>
-        {props.tableList.length ? (
+        {props.menuList.length ? (
           <table className="table table-striped mt-4">
             <thead>
               <tr>
                 <th>No</th>
                 <th>ID</th>
-                <th>Availability</th>
+                <th>Menu Name</th>
+                <th>Price</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
-              {props.tableList.map((table, index) => {
+              {props.menuList.map((menu, index) => {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{table.id}</td>
-                    <td>
-                      {table.availability ? 'AVAILABLE' : 'NOT AVAILABILE'}
-                    </td>
+                    <td>{menu.id}</td>
+                    <td>{menu.name}</td>
+                    <td>{menu.price}</td>
                     <td>
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => props.handleDelete('table', index)}
+                        onClick={() => {
+                          props.handleDelete('menu', index);
+                        }}
                       >
                         Delete
                       </button>
@@ -86,7 +93,7 @@ export default function TableView(props) {
             </tbody>
           </table>
         ) : (
-          <h3>Tidak ada table yang tersedia</h3>
+          <h3>Tidak ada menu yang tersedia</h3>
         )}
       </div>
     );
