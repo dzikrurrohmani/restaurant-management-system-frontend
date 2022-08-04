@@ -1,0 +1,26 @@
+.backdrop-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    flex-direction: column;
+    z-index: 102;
+}
+
+.backdrop-content{
+    background-color: whitesmoke;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid rgb(102, 108, 106);
+    border-radius: 5px;
+    flex-direction: column;
+}

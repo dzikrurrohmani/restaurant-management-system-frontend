@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import { EMAIL_REGEX } from '../../shared/constants';
+import { WithLoading } from '../../shared/WithLoading';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,51 +14,59 @@ export default class Login extends Component {
     };
   }
 
-  logChange = (key, value) => {
+  logChange = (event) => {
     if (!this.state.buttonOn) {
       this.setState({
         buttonOn: true,
       });
     }
-    this.setState({
-      [key]: value,
-    });
-    key === 'unameInput' ? this.unameValidate() : this.paswdValidate();
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      this.validate(event.target.name, event.target.value)
+    );
   };
 
-  unameValidate = () => {
-    if (
-        this.state.unameInput.match(/^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/)
-      )
-    {
-      this.setState({
-        unameValid: true,
-      });
+  validate = (key, value) => {
+    if (key === 'unameInput') {
+      if (value.match(EMAIL_REGEX)) {
+        this.setState({
+          unameValid: true,
+        });
+      } else if (!this.state.unameInput.match(EMAIL_REGEX)) {
+        this.setState({
+          unameValid: false,
+        });
+      }
     } else {
-      this.setState({
-        unameValid: false,
-      });
+      if (value.length > 6) {
+        this.setState({
+          paswdValid: true,
+        });
+      } else {
+        this.setState({
+          paswdValid: false,
+        });
+      }
     }
   };
 
-  paswdValidate = () => {
-    if (this.state.paswdInput.length > 6) {
-      this.setState({
-        paswdValid: true,
-      });
-    } else {
-      this.setState({
-        paswdValid: false,
-      });
-    }
-  };
-
-  logSubmit = (event) => {
+  logSubmit = async (event) => {
     event.preventDefault();
     if (
       this.state.unameInput === 'admin@example.com' &&
       this.state.paswdInput === '12345678'
     ) {
+      this.props.onLoading(true)
+      await (() => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 2000);
+        });
+      })();
+      this.props.onLoading(false);
       alert(`Selamat datang ${this.state.unameInput}, login berhasil`);
       this.props.handleLog(true);
     } else {
@@ -71,6 +81,10 @@ export default class Login extends Component {
       buttonOn: this.state.buttonOn,
       logChange: this.logChange,
       logSubmit: this.logSubmit,
+      unameInput: this.state.unameInput,
+      paswdInput: this.state.paswdInput,
     });
   }
 }
+
+export default WithLoading(Login);

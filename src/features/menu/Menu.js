@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { menu } from '../../model/menu';
 import MenuService from '../../services/MenuService';
+import { WithLoading } from '../../shared/WithLoading';
 
-export default class Menu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,31 +34,31 @@ export default class Menu extends Component {
   };
 
   getAllMenu = async () => {
-    // this.props.handleShowLoading(true);
+    this.props.onLoading(true);
     try {
       const menus = await this.service.getMenu();
       this.setState({
         menus: menus,
       });
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
     } catch (e) {
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
       alert('oops');
     }
   };
 
   onSubmit = async () => {
     try {
-      // this.props.handleShowLoading(true);
+      this.props.onLoading(true);
       const { id, name, price, category } = this.state;
       const result = await this.service.addMenu(
         menu(id, name, price, category)
       );
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
       alert(`Successfully add ${result.name}`);
       // this.props.onCancelForm();
     } catch (e) {
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
       alert('Maaf terjadi kesalahan sistem');
     }
     this.setState({
@@ -72,13 +73,13 @@ export default class Menu extends Component {
   onDelete = async (id) => {
     const result = window.confirm('Are you sure want to delete ?');
     if (result) {
-      // this.props.handleShowLoading(true);
+      this.props.onLoading(true);
       try {
         await this.service.deleteMenu(id);
         await this.getAllMenu();
-        // this.props.handleShowLoading(false);
+        this.props.onLoading(false);
       } catch (e) {
-        // this.props.handleShowLoading(false);
+        this.props.onLoading(false);
         alert('Maaf terjadi kesalahan sistem');
       }
     }
@@ -99,3 +100,5 @@ export default class Menu extends Component {
     });
   }
 }
+
+export default WithLoading(Menu);

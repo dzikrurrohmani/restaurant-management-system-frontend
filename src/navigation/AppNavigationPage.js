@@ -3,7 +3,7 @@ export default class AppNavigationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: true, // seharusnya false, untuk keperluan development
+      isActive: false, // seharusnya false, true untuk keperluan development
     };
   }
 

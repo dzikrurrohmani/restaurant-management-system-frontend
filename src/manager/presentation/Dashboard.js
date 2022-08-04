@@ -10,7 +10,7 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 4,
+      view: 1,
     };
   }
 
@@ -29,6 +29,11 @@ export default class Dashboard extends Component {
       view: 3,
     });
   };
+  transactionView = () => {
+    this.setState({
+      view: 4,
+    });
+  };
 
   render() {
     let tampil;
@@ -44,7 +49,7 @@ export default class Dashboard extends Component {
         break;
       default:
         tampil = (
-          <Welcome menuView={this.menuView} tableView={this.tableView} />
+          <Welcome menuView={this.menuView} tableView={this.tableView} transactionView={this.transactionView} />
         );
         break;
     }
@@ -53,6 +58,7 @@ export default class Dashboard extends Component {
       welcomeView: this.welcomeView,
       menuView: this.menuView,
       tableView: this.tableView,
+      transactionView: this.transactionView,
       handleLog: this.props.handleLog,
     });
   }

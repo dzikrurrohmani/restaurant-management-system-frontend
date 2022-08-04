@@ -12,6 +12,7 @@ export default function Welcome(props) {
       >
         <button style={{width: '150px', height: '100px'}} onClick={props.menuView}>MENU MANAGEMENT</button>
         <button style={{width: '150px', height: '100px'}} onClick={props.tableView}>TABLE MANAGEMENT</button>
+        <button style={{width: '150px', height: '100px'}} onClick={props.transactionView}>TRANSACTION MANAGEMENT</button>
       </div>
     </div>
   );

@@ -10,3 +10,4 @@ export const TRANSACTION_ACTION_TYPE = {
     CATALOGUE_ORDER: 'CATALOGUE_ORDER',
 }
 
+export const EMAIL_REGEX = '([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\\.[A-Z|a-z]{2,})+';

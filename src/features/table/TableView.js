@@ -1,6 +1,6 @@
 import {Badge} from "react-bootstrap";
-import { DropDownList } from '../../shared/DropDownList';
-import InputForm from '../../shared/InputForm';
+import { DropDownList } from '../../shared/components/DropDownList';
+import InputForm from '../../shared/components/InputForm';
 
 export default function TableView(props) {
   if (props.isSubmitting) {

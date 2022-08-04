@@ -1,7 +1,7 @@
 import './LoginView.css';
 
 export default function LoginView(props) {
-  const { unameValid, paswdValid, logChange, logSubmit, buttonOn } = props;
+  const { paswdInput, unameInput, unameValid, paswdValid, logChange, logSubmit, buttonOn } = props;
   return (
     <>
       <div
@@ -21,10 +21,11 @@ export default function LoginView(props) {
             <input
               className="html_input"
               type="text"
-              name="username"
+              name="unameInput"
               id="username"
-              placeholder="enter your email"
-              onChange={(event) => logChange('unameInput', event.target.value)}
+              placeholder="admin@example.com"
+              value={unameInput}
+              onChange={logChange}
             />
             {unameValid ? (
               <h4 style={{ color: 'bisque', fontSize: '10px' }}>1</h4>
@@ -40,10 +41,11 @@ export default function LoginView(props) {
             <input
               className="html_input"
               type="password"
-              name="password"
+              name="paswdInput"
               id="password"
-              placeholder="enter your password"
-              onChange={(event) => logChange('paswdInput', event.target.value)}
+              placeholder="12345678"
+              value={paswdInput}
+              onChange={logChange}
             />
             {paswdValid ? (
               <p style={{ color: 'bisque', fontSize: '10px' }}>1</p>

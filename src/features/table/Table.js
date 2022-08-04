@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { table } from '../../model/table';
 import TableService from '../../services/TableService';
+import { WithLoading } from '../../shared/WithLoading';
 
-export default class Table extends Component {
+class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,48 +36,50 @@ export default class Table extends Component {
   };
 
   getAllTable = async () => {
-    // this.props.handleShowLoading(true);
+    this.props.onLoading(true);
     try {
       const tables = await this.service.getTable();
       this.setState({
         tables: tables,
       });
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
     } catch (e) {
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
       alert('oops');
     }
   };
 
   onSubmit = async () => {
     try {
-      // this.props.handleShowLoading(true);
+      this.props.onLoading(true);
       const { id, number, status } = this.state;
-      const result = await this.service.addTable(table(id, number, status[0].toUpperCase()));
-      // this.props.handleShowLoading(false);
+      const result = await this.service.addTable(
+        table(id, number, status[0].toUpperCase())
+      );
+      this.props.onLoading(false);
       alert(`Successfully add ${result.name}`);
       // this.props.onCancelForm();
     } catch (e) {
-      // this.props.handleShowLoading(false);
+      this.props.onLoading(false);
       alert('Maaf terjadi kesalahan sistem');
     }
     this.setState({
       isSubmitting: false,
-      id: this.state.id,
-      status: this.state.status,
+      id: '',
+      status: 'choose',
     });
   };
 
   onDelete = async (id) => {
     const result = window.confirm('Are you sure want to delete ?');
     if (result) {
-      // this.props.handleShowLoading(true);
+      this.props.onLoading(true);
       try {
         await this.service.deleteTable(id);
         await this.getAllTable();
-        // this.props.handleShowLoading(false);
+        this.props.onLoading(false);
       } catch (e) {
-        // this.props.handleShowLoading(false);
+        this.props.onLoading(false);
         alert('Maaf terjadi kesalahan sistem');
       }
     }
@@ -96,3 +99,5 @@ export default class Table extends Component {
     });
   }
 }
+
+export default WithLoading(Table);

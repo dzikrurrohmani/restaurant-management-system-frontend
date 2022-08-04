@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 
 export default function HeaderComponent(props) {
-  const { welcomeView, menuView, tableView } = props;
+  const { welcomeView, menuView, tableView, transactionView } = props;
   return (
     <>
       <NavbarBS
@@ -31,6 +31,9 @@ export default function HeaderComponent(props) {
             ></NavbarBS.Toggle>
             <NavbarBS.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
+                <Nav.Link onClick={transactionView}>
+                  &nbsp;&nbsp;Transaction&nbsp;&nbsp;
+                </Nav.Link>
                 <Nav.Link onClick={menuView}>
                   &nbsp;&nbsp;Menu&nbsp;&nbsp;
                 </Nav.Link>
