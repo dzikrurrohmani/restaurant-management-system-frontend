@@ -11,10 +11,6 @@ export default function AppNavigationView(props) {
       {isActive ? (
         <Dashboard
           render={DashboardView}
-          tableList={tableList}
-          menuList={menuList}
-          handleSubmit={handleSubmit}
-          handleDelete={handleDelete}
           handleLog={handleLog}
         />
       ) : (

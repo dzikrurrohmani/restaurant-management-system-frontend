@@ -1,3 +1,3 @@
-export const table = (id = '', tableNumber = '', status = '') => {
-    return {id, tableNumber, status}
+export const table = (id = '', number = '', status = '') => {
+    return {id, number, status}
 }

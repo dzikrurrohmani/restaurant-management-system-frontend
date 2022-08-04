@@ -19,7 +19,6 @@ export default class Dashboard extends Component {
     });
   };
   menuView = () => {
-    console.log('setstate view');
     this.setState({
       view: 2,
     });
@@ -36,10 +35,6 @@ export default class Dashboard extends Component {
       case 2:
         tampil = (
           <Menu
-            stateKey="menuList"
-            menuList={this.props.menuList}
-            handleSubmit={this.props.handleSubmit}
-            handleDelete={this.props.handleDelete}
             menuView={this.menuView}
             render={MenuView}
           />
@@ -48,10 +43,6 @@ export default class Dashboard extends Component {
       case 3:
         tampil = (
           <Table
-            stateKey="tableList"
-            tableList={this.props.tableList}
-            handleSubmit={this.props.handleSubmit}
-            handleDelete={this.props.handleDelete}
             tableView={this.tableView}
             render={TableView}
           />

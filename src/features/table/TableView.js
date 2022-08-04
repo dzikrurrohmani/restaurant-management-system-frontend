@@ -8,7 +8,7 @@ export default function TableView(props) {
         <h1>Form Add Table</h1>
         <div>
           <InputForm
-            label="ID Meja"
+            label="Table ID"
             type="text"
             value={props.id}
             placeholder="masukkan id"
@@ -16,10 +16,10 @@ export default function TableView(props) {
             onChange={props.onChange}
           />
           <InputForm
-            label="Ketersediaan"
+            label="Status"
             type="text"
             value={props.status}
-            placeholder="masukkan ketersediaan"
+            placeholder="masukkan status"
             id="status"
             onChange={props.onChange}
           />
@@ -77,7 +77,7 @@ export default function TableView(props) {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => props.handleDelete('table', index)}
+                        onClick={() => props.handleDelete('table', table.id)}
                       >
                         Delete
                       </button>

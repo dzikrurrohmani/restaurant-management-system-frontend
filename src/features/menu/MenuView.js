@@ -1,4 +1,4 @@
-import InputForm from "../../shared/InputForm";
+import InputForm from '../../shared/InputForm';
 
 export default function MenuView(props) {
   if (props.isSubmitting) {
@@ -7,7 +7,7 @@ export default function MenuView(props) {
         <h1>Form Add Menu</h1>
         <div>
           <InputForm
-            label="ID Menu"
+            label="Menu ID"
             type="text"
             value={props.id}
             placeholder="masukkan id"
@@ -15,7 +15,7 @@ export default function MenuView(props) {
             onChange={props.onChange}
           />
           <InputForm
-            label="Nama Menu"
+            label="Menu Name"
             type="text"
             value={props.name}
             placeholder="masukkan nama"
@@ -23,19 +23,36 @@ export default function MenuView(props) {
             onChange={props.onChange}
           />
           <InputForm
-            label="price"
+            label="Price"
             type="text"
             value={props.price}
             placeholder="masukkan price"
             id="price"
             onChange={props.onChange}
           />
+          <label>Category</label>
+          <select
+            className="menu-form-input"
+            name="category"
+            onChange={props.onChange}
+          >
+            <option value="food">Food</option>
+            <option value="beverage">Beverage</option>
+          </select>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
-          <button type="button" class="btn btn-warning" onClick={props.onSubmit}>
+          <button
+            type="button"
+            class="btn btn-warning"
+            onClick={props.onSubmit}
+          >
             Submit
           </button>
-          <button type="button" class="btn btn-danger" onClick={() => props.onSubmitting(false)}>
+          <button
+            type="button"
+            class="btn btn-danger"
+            onClick={() => props.onSubmitting(false)}
+          >
             Cancel
           </button>
         </div>
@@ -81,7 +98,7 @@ export default function MenuView(props) {
                         type="button"
                         className="btn btn-danger"
                         onClick={() => {
-                          props.handleDelete('menu', index);
+                          props.handleDelete(menu.id);
                         }}
                       >
                         Delete

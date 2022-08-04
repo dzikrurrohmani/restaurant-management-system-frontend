@@ -40,7 +40,7 @@ export const tables = [
   {
     id: 'dcd7',
     number: '025',
-    status: 'u',
+    status: 'U',
   },
   {
     id: '4c1c',
