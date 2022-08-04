@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {getDependency} from "./deps";
 
-export function withDep(WrappedComponent, deps) {
+export function WithDep(WrappedComponent, deps) {
     return class extends Component {
         constructor(props) {
             super(props);

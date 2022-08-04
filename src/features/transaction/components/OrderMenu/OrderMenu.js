@@ -5,11 +5,12 @@ import { addOrder, addFBMenu } from '../../state/TransactionAction';
 import { connect } from 'react-redux';
 import './OrderMenu.css';
 import { WithLoading } from '../../../../shared/WithLoading';
+import { WithDep } from '../../../../manager/dependencies/WithDep';
 
 class OrderMenu extends Component {
   constructor(props) {
     super(props);
-    this.service = MenuService();
+    this.service = props.MenuService;
     this.state = {
       menuList: [],
       isShowingForm: false,
@@ -52,7 +53,6 @@ class OrderMenu extends Component {
       isShowingForm: !this.state.isShowingForm,
       menuSelected: menu,
     });
-    console.log(menu);
   };
 
   handleAddOrder = (qty) => {
@@ -131,7 +131,7 @@ const mapStateToProps = (state) => {
     menus: state.transactionReducer,
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WithLoading(OrderMenu));
+export default WithDep(
+  connect(mapStateToProps, mapDispatchToProps)(WithLoading(OrderMenu)),
+  ['MenuService']
+);

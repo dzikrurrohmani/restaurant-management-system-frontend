@@ -87,9 +87,7 @@ export default function MenuView(props) {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{menu.id}</td>
-                    <td>
-                      {menu.name} {menu.category}
-                    </td>
+                    <td>{menu.name}</td>
                     <td>{menu.price}</td>
                     <td>
                       <button

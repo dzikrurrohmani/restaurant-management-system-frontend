@@ -6,9 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { setupStore } from '../src/shared/store';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { register } from "./manager/dependencies/deps";
+import MenuService from './services/MenuService';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = setupStore();
+(_ => {
+  register('MenuService', MenuService())
+})()
 root.render(
   <React.StrictMode>
     <Provider store={store}>
