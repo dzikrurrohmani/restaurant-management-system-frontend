@@ -8,7 +8,7 @@ export default class Table extends Component {
     this.state = {
       id: '',
       number: '',
-      status: '',
+      status: 'choose',
       isSubmitting: false,
       tables: [],
     };
@@ -19,15 +19,18 @@ export default class Table extends Component {
     this.getAllTable();
   }
 
-  onChange = (key, value) => {
+  onChange = (event) => {
     this.setState({
-      [key]: value,
+      [event.target.name]: event.target.value,
     });
   };
 
   onSubmitting = (value) => {
     this.setState({
       isSubmitting: value,
+      id: '',
+      number: '',
+      status: 'choose',
     });
   };
 
@@ -49,7 +52,7 @@ export default class Table extends Component {
     try {
       // this.props.handleShowLoading(true);
       const { id, number, status } = this.state;
-      const result = await this.service.addTable(table(id, number, status));
+      const result = await this.service.addTable(table(id, number, status[0].toUpperCase()));
       // this.props.handleShowLoading(false);
       alert(`Successfully add ${result.name}`);
       // this.props.onCancelForm();

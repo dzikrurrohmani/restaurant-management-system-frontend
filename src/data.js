@@ -1,7 +1,7 @@
 export const menus = [
   {
     id: '664a',
-    name: 'nasi goreng',
+    name: 'Nasi Goreng',
     price: 15000,
     category: 'food',
   },

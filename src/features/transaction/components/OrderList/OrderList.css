@@ -1,0 +1,44 @@
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px;
+    background-color: white;
+    padding: 16px;
+    border-left: 3px solid rgb(102, 108, 106);
+    border-radius: 5px;
+}
+
+.order-total{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
+}
+.order-action{
+    text-align: center;
+    padding: 8px;
+    background-color: darkturquoise;
+    margin: 8px 0 8px 0;
+    cursor: pointer;
+    box-shadow: 3px 5px 9px #888888;
+    font-weight: bolder;
+}
+.cancel-action{
+    text-align: center;
+    padding: 8px;
+    background-color: tomato;
+    margin: 8px 0 8px 0;
+    cursor: pointer;
+    box-shadow: 3px 5px 9px #888888;
+    font-weight: bolder;
+}
+
+.order-list-empty{
+    display: flex;
+    height: 91vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

@@ -9,7 +9,12 @@ export default function HeaderComponent(props) {
   const { welcomeView, menuView, tableView } = props;
   return (
     <>
-      <NavbarBS bg="dark" variant="dark" expand="lg">
+      <NavbarBS
+        bg="dark"
+        variant="dark"
+        expand="lg"
+        style={{ position: 'fixed', width: '100%' }}
+      >
         <Container style={{ display: 'flex', alignItems: 'first baseline' }}>
           {/* <NavbarBS.Brand onClick={welcomeView}>
             WMB
@@ -18,7 +23,12 @@ export default function HeaderComponent(props) {
             WMB (Warung Makan Bahari)
           </Nav.Link>
           <Container style={{ marginRight: 'initial', width: 'max-content' }}>
-            <NavbarBS.Toggle aria-controls="basic-navbar-nav"></NavbarBS.Toggle>
+            <NavbarBS.Toggle
+              aria-controls="basic-navbar-nav"
+              style={{
+                zIndex: '102',
+              }}
+            ></NavbarBS.Toggle>
             <NavbarBS.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link onClick={menuView}>

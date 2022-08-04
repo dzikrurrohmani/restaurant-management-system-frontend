@@ -1,14 +1,16 @@
 export default function FooterComponent() {
   return (
     <footer
-      className="text-center p-1 bg-dark"
+      className="bg-dark"
       style={{
-        position: 'absolute',
-        bottom: '0',
-        width: '-moz-available',
+        textAlign: 'center',
+        position: 'absolut',
+        marginTop: '-25px',
+        width: '100%',
+        height: '25px',
       }}
     >
-      <h6 className="text-white">© 2022 WMB, Inc. (All Rights Reserved)</h6>
+      <p className="text-white" style={{fontSize: '90%', marginBottom: '0'}}>© 2022 WMB, Inc. (All Rights Reserved)</p>
     </footer>
   );
 }

@@ -1,0 +1,19 @@
+.order-container {
+    display: flex;
+    height: 91vh;
+    width: 100%;
+}
+
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 25%;
+    padding: 8px;
+}
+
+.order-menu-list-container {
+    flex-basis: 75%;
+    background-color: white;
+    padding: 8px;
+}
+

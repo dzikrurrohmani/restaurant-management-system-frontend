@@ -1,3 +1,4 @@
+import { DropDownList } from './../../shared/DropDownList';
 import InputForm from '../../shared/InputForm';
 
 export default function MenuView(props) {
@@ -8,7 +9,6 @@ export default function MenuView(props) {
         <div>
           <InputForm
             label="Menu ID"
-            type="text"
             value={props.id}
             placeholder="masukkan id"
             id="id"
@@ -16,7 +16,6 @@ export default function MenuView(props) {
           />
           <InputForm
             label="Menu Name"
-            type="text"
             value={props.name}
             placeholder="masukkan nama"
             id="name"
@@ -24,33 +23,30 @@ export default function MenuView(props) {
           />
           <InputForm
             label="Price"
-            type="text"
+            type="number"
             value={props.price}
             placeholder="masukkan price"
             id="price"
             onChange={props.onChange}
           />
-          <label>Category</label>
-          <select
-            className="menu-form-input"
-            name="category"
+          <DropDownList
+            label="Category"
+            values={[props.category, 'Food', 'Beverages']}
             onChange={props.onChange}
-          >
-            <option value="food">Food</option>
-            <option value="beverage">Beverage</option>
-          </select>
+            name="category"
+          />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
           <button
             type="button"
-            class="btn btn-warning"
+            className="btn btn-warning"
             onClick={props.onSubmit}
           >
             Submit
           </button>
           <button
             type="button"
-            class="btn btn-danger"
+            className="btn btn-danger"
             onClick={() => props.onSubmitting(false)}
           >
             Cancel
@@ -91,7 +87,9 @@ export default function MenuView(props) {
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{menu.id}</td>
-                    <td>{menu.name}</td>
+                    <td>
+                      {menu.name} {menu.category}
+                    </td>
                     <td>{menu.price}</td>
                     <td>
                       <button

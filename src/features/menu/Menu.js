@@ -9,7 +9,7 @@ export default class Menu extends Component {
       id: '',
       name: '',
       price: '',
-      category: '',
+      category: 'choose',
       isSubmitting: false,
       menus: [],
     };
@@ -20,9 +20,9 @@ export default class Menu extends Component {
     this.getAllMenu();
   }
 
-  onChange = (key, value) => {
+  onChange = (event) => {
     this.setState({
-      [key]: value,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -62,9 +62,10 @@ export default class Menu extends Component {
     }
     this.setState({
       isSubmitting: false,
-      id: this.state.id,
-      name: this.state.name,
-      price: this.state.price,
+      id: '',
+      name: '',
+      price: '',
+      category: 'choose',
     });
   };
 

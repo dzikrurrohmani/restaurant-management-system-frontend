@@ -1,36 +1,47 @@
+import {Badge} from "react-bootstrap";
+import { DropDownList } from '../../shared/DropDownList';
 import InputForm from '../../shared/InputForm';
 
 export default function TableView(props) {
   if (props.isSubmitting) {
     return (
-      <div
-      className="container-lg">
+      <div className="container-lg">
         <h1>Form Add Table</h1>
         <div>
           <InputForm
             label="Table ID"
-            type="text"
             value={props.id}
             placeholder="masukkan id"
             id="id"
             onChange={props.onChange}
           />
           <InputForm
-            label="Status"
-            type="text"
-            value={props.status}
+            label="Table Number"
+            value={props.number}
             placeholder="masukkan status"
-            id="status"
+            id="number"
             onChange={props.onChange}
           />
+          <DropDownList
+            label="Status"
+            values={[props.status, 'Available', 'Unavailable']}
+            onChange={props.onChange}
+            name="status"
+          />
         </div>
-        <div
-          style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}
-        >
-          <button type="button" class="btn btn-warning" onClick={props.onSubmit}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
+          <button
+            type="button"
+            className="btn btn-warning"
+            onClick={props.onSubmit}
+          >
             Submit
           </button>
-          <button type="button" class="btn btn-danger" onClick={() => props.onSubmitting(false)}>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => props.onSubmitting(false)}
+          >
             Cancel
           </button>
         </div>
@@ -71,7 +82,10 @@ export default function TableView(props) {
                     <td>{table.id}</td>
                     <td>{table.number}</td>
                     <td>
-                      {table.status ? 'AVAILABLE' : 'NOT AVAILABILE'}
+                      <Badge bg={table.status === 'A' ? 'primary' : 'danger'}>
+                        {table.status}
+                      </Badge>
+                      {/* {table.status === 'A' ? 'AVAILABLE' : 'NOT AVAILABILE'} */}
                     </td>
                     <td>
                       <button
