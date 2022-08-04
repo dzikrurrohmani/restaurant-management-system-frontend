@@ -11,7 +11,7 @@ export class OrderList extends Component {
   handleSubmitOrder = async () => {
     try {
       await this.props.submitOrder();
-      alert('order success');
+      alert('Succesfully create order..');
     } catch (e) {
       alert(e);
     } finally {

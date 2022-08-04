@@ -1,5 +1,5 @@
 import {Component} from "react";
-import LoadingPage from "./components/loadingPage/LoadingPage";
+import LoadingPage from "./components/LoadingPage/LoadingPage";
 
 export function WithLoading(WrappedComponent) {
     return class extends Component {

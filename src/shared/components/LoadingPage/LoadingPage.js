@@ -1,12 +1,12 @@
-import './loadingPage.css';
+import './LoadingPage.css';
 import Lottie from "lottie-react";
-import loading from './loading.json'
+import animation from './animation.json'
 
 const LoadingPage = ({title}) => {
     return (
         <div className='backdrop-container'>
             <div className='backdrop-content'>
-                <Lottie animationData={loading} loop={true} style={{width:'100px',height:'100px'}}/>
+                <Lottie animationData={animation} loop={true} style={{width:'100px',height:'100px'}}/>
                 {title}
             </div>
         </div>

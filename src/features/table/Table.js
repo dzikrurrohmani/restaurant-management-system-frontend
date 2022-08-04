@@ -45,7 +45,7 @@ class Table extends Component {
       this.props.onLoading(false);
     } catch (e) {
       this.props.onLoading(false);
-      alert('oops');
+      alert('Something went wrong..');
     }
   };
 
@@ -53,15 +53,15 @@ class Table extends Component {
     try {
       this.props.onLoading(true);
       const { id, number, status } = this.state;
-      const result = await this.service.addTable(
+      await this.service.addTable(
         table(id, number, status[0].toUpperCase())
       );
       this.props.onLoading(false);
-      alert(`Successfully add ${result.name}`);
+      alert(`Successfully add table..`);
       // this.props.onCancelForm();
     } catch (e) {
       this.props.onLoading(false);
-      alert('Maaf terjadi kesalahan sistem');
+      alert('Something went wrong..');
     }
     this.setState({
       isSubmitting: false,
@@ -80,7 +80,7 @@ class Table extends Component {
         this.props.onLoading(false);
       } catch (e) {
         this.props.onLoading(false);
-        alert('Maaf terjadi kesalahan sistem');
+        alert('Something went wrong..');
       }
     }
   };

@@ -43,7 +43,7 @@ class Menu extends Component {
       this.props.onLoading(false);
     } catch (e) {
       this.props.onLoading(false);
-      alert('oops');
+      alert('Something went wrong..');
     }
   };
 
@@ -51,15 +51,15 @@ class Menu extends Component {
     try {
       this.props.onLoading(true);
       const { id, name, price, category } = this.state;
-      const result = await this.service.addMenu(
+      await this.service.addMenu(
         menu(id, name, price, category)
       );
       this.props.onLoading(false);
-      alert(`Successfully add ${result.name}`);
+      alert(`Successfully add menu..`);
       // this.props.onCancelForm();
     } catch (e) {
       this.props.onLoading(false);
-      alert('Maaf terjadi kesalahan sistem');
+      alert('Something went wrong..');
     }
     this.setState({
       isSubmitting: false,
@@ -80,7 +80,7 @@ class Menu extends Component {
         this.props.onLoading(false);
       } catch (e) {
         this.props.onLoading(false);
-        alert('Maaf terjadi kesalahan sistem');
+        alert('Something went wrong..');
       }
     }
   };
