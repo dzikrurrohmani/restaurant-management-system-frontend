@@ -6,20 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import { setupStore } from '../src/shared/store';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { register } from "./manager/dependencies/deps";
+import { register } from './manager/dependencies/deps';
 import MenuService from './services/MenuService';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = setupStore();
-(_ => {
-  register('MenuService', MenuService())
-})()
+((_) => {
+  register('MenuService', MenuService());
+})();
 root.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

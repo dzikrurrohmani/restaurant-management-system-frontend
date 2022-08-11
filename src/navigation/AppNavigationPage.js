@@ -1,22 +1,23 @@
-import { Component } from 'react';
-export default class AppNavigationPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isActive: false, // seharusnya false, true untuk keperluan development
-    };
-  }
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-  handleLog = (state = false) => {
-    this.setState({
-      isActive: state,
-    });
+const AppNavigationPage = (props) => {
+  const navigate = useNavigate();
+  console.log('AppNavPage');
+  const [isActive, setIsActive] = useState(false);
+  const handleLog = (state = false) => {
+    if (state) {
+      setIsActive(state);
+      navigate('/home', { replace: true });
+    } else {
+      setIsActive(false);
+      navigate('/', { replace: true });
+    }
   };
+  return props.render({
+    isActive: isActive,
+    handleLog: handleLog,
+  });
+};
 
-  render() {
-    return this.props.render({
-      isActive: this.state.isActive,
-      handleLog: this.handleLog,
-    });
-  }
-}
+export default AppNavigationPage;

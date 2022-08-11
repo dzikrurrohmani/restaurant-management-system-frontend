@@ -1,7 +1,7 @@
 import { DropDownList } from '../../shared/components/DropDownList';
 import InputForm from '../../shared/components/InputForm';
 
-export default function MenuView(props) {
+const MenuView = (props) => {
   if (props.isSubmitting) {
     return (
       <div className="container-lg">
@@ -111,4 +111,6 @@ export default function MenuView(props) {
       </div>
     );
   }
-}
+};
+
+export default MenuView;

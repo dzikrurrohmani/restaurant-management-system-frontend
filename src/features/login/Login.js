@@ -75,6 +75,7 @@ class Login extends Component {
   };
 
   render() {
+    console.log('login');
     return this.props.render({
       unameValid: this.state.unameValid,
       paswdValid: this.state.paswdValid,

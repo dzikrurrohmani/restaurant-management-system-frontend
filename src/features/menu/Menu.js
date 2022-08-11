@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { menu } from '../../model/menu';
-import MenuService from '../../services/MenuService';
 import { WithLoading } from '../../shared/WithLoading';
 import { WithDep } from "../../manager/dependencies/WithDep";
 
