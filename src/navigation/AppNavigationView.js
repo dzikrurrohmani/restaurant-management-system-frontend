@@ -1,8 +1,9 @@
 import '../App.css';
 import Dashboard from '../manager/presentation/Dashboard';
+import DashboardView from '../manager/presentation/DahsboardView';
+import Login from '../features/login/UseLogin';
 import LoginView from '../features/login/LoginView';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import DashboardView from '../manager/presentation/DahsboardView';
 
 const AppNavigationView = (props) => {
   const { isActive, handleLog, handleHeader } = props;
@@ -12,7 +13,13 @@ const AppNavigationView = (props) => {
       <Routes>
         <Route
           index
-          element={<LoginView handleLog={handleLog} handleHeader={handleHeader} />}
+          element={
+            <Login
+              handleLog={handleLog}
+              render={LoginView}
+              handleHeader={handleHeader}
+            />
+          }
         />
         <Route element={isActive ? <Outlet /> : <Navigate to="/" replace />}>
           <Route

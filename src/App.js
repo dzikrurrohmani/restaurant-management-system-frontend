@@ -7,7 +7,7 @@ import { AxiosClient } from './shared/api/AxiosClient';
 import { DepsProvider } from './shared/api/DepsContext';
 
 const App = () => {
-  const [header, setHeader] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBcGlXbWJQb3MiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkB3bWIuY29tIn0.1BpkHjjNy307-QprKFfkY-p-aBgZILIdtA0r1zkJ5L8');
+  const [header, setHeader] = useState('');
 
   const apiClient = ApiClientFactory(AxiosClient(header));
   const services = ServiceFactory(apiClient);

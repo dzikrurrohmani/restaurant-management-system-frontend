@@ -1,4 +1,4 @@
-import { Component, useState, useRef } from 'react';
+import { useState } from 'react';
 import { useDeps } from '../../shared/api/DepsContext';
 import LocalStorageHelper from '../../shared/api/LocalStorageHelper';
 import {
@@ -10,7 +10,7 @@ import { WithLoading } from '../../shared/WithLoading';
 
 const UseLogin = (props) => {
   const { authenticationService } = useDeps();
-  const { onSetItemLocalStorage, onClearItemLocalStorage, onGetItemLocalStorage } = LocalStorageHelper('token');
+  const { onSetItemLocalStorage } = LocalStorageHelper('token');
   const [userCred, setUserCred] = useState({
     [USER_NAME_LABEL]: '',
     [USER_PASSWORD_LABEL]: '',
@@ -30,8 +30,8 @@ const UseLogin = (props) => {
         [USER_PASSWORD_LABEL]: userCred[USER_PASSWORD_LABEL],
       });
       onSetItemLocalStorage(response.token);
-      props.handleHeader(response.token)
-      props.handleLog(true)
+      props.handleHeader(response.token);
+      props.handleLog(true);
       window.alert('login success');
     } catch (error) {
       window.alert(error.message);
@@ -82,32 +82,31 @@ const UseLogin = (props) => {
     }
   };
 
-  const onLogout = async () => {
-    props.onLoading(true);
-    try {
-      await authenticationService.doLogout({
-        token: onGetItemLocalStorage(),
-      });
-      onClearItemLocalStorage();
-      props.handleHeader('')
-      props.handleLog(false)
-      window.alert('logout success');
-    } catch (error) {
-      window.alert(error.message);
-    } finally {
-      props.onLoading(false);
-    }
-  };
-
-  return {
-    isAuthenticated,
+  console.log(buttonOn, userCred.USER_NAME_LABEL, userCred.USER_PASSWORD_LABEL);
+  return props.render({
     userCred,
     userCredValidity,
     buttonOn,
     onChange,
     onLogin,
-    onLogout
-  };
+  });
 };
 
 export default WithLoading(UseLogin);
+
+// const onLogout = async () => {
+//   props.onLoading(true);
+//   try {
+//     await authenticationService.doLogout({
+//       token: onGetItemLocalStorage(),
+//     });
+//     onClearItemLocalStorage();
+//     props.handleHeader('');
+//     props.handleLog(false);
+//     window.alert('logout success');
+//   } catch (error) {
+//     window.alert(error.message);
+//   } finally {
+//     props.onLoading(false);
+//   }
+// };

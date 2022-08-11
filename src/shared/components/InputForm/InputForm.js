@@ -1,13 +1,30 @@
-import React from 'react';
+import './InputForm.css';
 
-const InputForm = (props) => {
-  const { label, name, onChange, value } = props;
+export default function InputForm(props) {
+  const cekWarning = props.type === "number" ? Number(props.value)  > 0 : props.value
   return (
-    <>
-      <label>{label}</label>
-      <input name={name} value={value} onChange={onChange} />
-    </>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <label style={{ textAlign: 'left' }}>{props.label+ ' :'}</label>
+      <input
+        className="input"
+        type={props.type ? props.type : 'text'}
+        name={props.id}
+        value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+      />
+      {cekWarning ? (
+        <h4 style={{ color: 'green', fontSize: '22px' }}>✓</h4>
+      ) : (
+        <p style={{ color: 'red', fontSize: '12px' }}>
+          this field is required
+        </p>
+      )}
+    </div>
   );
-};
-
-export default InputForm;
+}

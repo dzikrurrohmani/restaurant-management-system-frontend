@@ -1,6 +1,6 @@
 import {Badge} from "react-bootstrap";
 import { DropDownList } from '../../shared/components/DropDownList';
-import InputForm from '../../shared/components/InputForm';
+import InputForm from '../../shared/components/InputForm/InputForm';
 
 export default function TableView(props) {
   if (props.isSubmitting) {
@@ -67,8 +67,7 @@ export default function TableView(props) {
           <table className="table table-striped mt-4">
             <thead>
               <tr>
-                <th>No</th>
-                <th>ID</th>
+                <th>#</th>
                 <th>Table Number</th>
                 <th>Status</th>
                 <th>&nbsp;</th>
@@ -76,14 +75,14 @@ export default function TableView(props) {
             </thead>
             <tbody>
               {props.tableList.map((table, index) => {
+                console.log(table.tableAvailability);
                 return (
                   <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{table.id}</td>
-                    <td>{table.number}</td>
+                    <th scope="row">{table.tableId}</th>
+                    <td>{table.tableDescription}</td>
                     <td>
-                      <Badge bg={table.status === 'A' ? 'primary' : 'danger'}>
-                        {table.status}
+                      <Badge bg={table.tableAvailability ? 'primary' : 'danger'}>
+                        {table.tableAvailability ? <>A</> : <>U</>}
                       </Badge>
                       {/* {table.status === 'A' ? 'AVAILABLE' : 'NOT AVAILABILE'} */}
                     </td>
@@ -91,7 +90,7 @@ export default function TableView(props) {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => props.handleDelete('table', table.id)}
+                        onClick={() => props.handleDelete('table', table.tableId)}
                       >
                         Delete
                       </button>

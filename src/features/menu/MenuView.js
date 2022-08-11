@@ -1,56 +1,64 @@
 import { DropDownList } from '../../shared/components/DropDownList';
-import InputForm from '../../shared/components/InputForm';
+import InputForm from '../../shared/components/InputForm/InputForm';
 
 const MenuView = (props) => {
-  if (props.isSubmitting) {
+  const {
+    newMenu,
+    menus,
+    isSubmitting,
+    setIsSubmitting,
+    onDelete,
+    onSubmit,
+    onChange,
+  } = props;
+  if (isSubmitting) {
     return (
       <div className="container-lg">
         <h1>Form Add Menu</h1>
-        <div>
+        <div style={{width: '60%', marginLeft: '20%'}}>
+          <div>
           <InputForm
             label="Menu ID"
-            value={props.id}
+            value={newMenu.menuId}
             placeholder="masukkan id"
-            id="id"
-            onChange={props.onChange}
+            id="menuId"
+            onChange={onChange}
           />
           <InputForm
             label="Menu Name"
-            value={props.name}
+            value={newMenu.menuName}
             placeholder="masukkan nama"
-            id="name"
-            onChange={props.onChange}
+            id="menuName"
+            onChange={onChange}
           />
           <InputForm
             label="Price"
             type="number"
-            value={props.price}
+            value={newMenu.menuPrice}
             placeholder="masukkan price"
-            id="price"
-            onChange={props.onChange}
+            id="menuPrice"
+            onChange={onChange}
           />
           <DropDownList
             label="Category"
-            values={[props.category, 'Food', 'Beverages']}
-            onChange={props.onChange}
-            name="category"
+            values={[newMenu.menuCategory, 'Food', 'Beverages']}
+            onChange={onChange}
+            name="menuCategory"
+            value={newMenu.menuCategory}
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
-          <button
-            type="button"
-            className="btn btn-warning"
-            onClick={props.onSubmit}
-          >
+          <button type="button" className="btn btn-warning" onClick={onSubmit}>
             Submit
           </button>
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => props.onSubmitting(false)}
+            onClick={() => setIsSubmitting(false)}
           >
             Cancel
           </button>
+          </div>
         </div>
       </div>
     );
@@ -65,36 +73,34 @@ const MenuView = (props) => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => props.onSubmitting(true)}
+            onClick={() => setIsSubmitting(true)}
           >
             Add Menu
           </button>
         </div>
-        {props.menuList.length ? (
+        {menus.length ? (
           <table className="table table-striped mt-4">
             <thead>
               <tr>
-                <th>No</th>
-                <th>ID</th>
+                <th>#</th>
                 <th>Menu Name</th>
                 <th>Price</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
-              {props.menuList.map((menu, index) => {
+              {menus.map((menu, index) => {
                 return (
                   <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{menu.menuId}</td>
+                    <th scope="row">{menu.menuId}</th>
                     <td>{menu.menuName}</td>
-                    {/* <td>{menu.menuPrice}</td> */}
+                    <td>{menu.menuPrice}</td>
                     <td>
                       <button
                         type="button"
                         className="btn btn-danger"
                         onClick={() => {
-                          props.handleDelete(menu.id);
+                          onDelete(newMenu.menuId);
                         }}
                       >
                         Delete

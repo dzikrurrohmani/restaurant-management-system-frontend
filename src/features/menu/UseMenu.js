@@ -7,9 +7,9 @@ const UseMenu = (props) => {
   // const [id, setId] = useState('');
   // const [number, setNumber] = useState('');
   // const [status, setStatus] = useState('choose');
-  
+
   const { menuService } = useDeps();
-  const [newMenu, setNewMenu] = useState({ menuName: '' });
+  const [newMenu, setNewMenu] = useState({ menuId: '', menuName: '', menuPrice: 0, menuCategory: 'choose' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [menus, setMenus] = useState([]);
 
@@ -46,18 +46,11 @@ const UseMenu = (props) => {
       await menuService.addMenu(menu(id, name, price, category));
       props.onLoading(false);
       alert(`Successfully add menu..`);
-      // props.onCancelForm();
+      ClearForm()
     } catch (e) {
       props.onLoading(false);
       alert('Something went wrong..');
     }
-    this.setState({
-      isSubmitting: false,
-      id: '',
-      name: '',
-      price: '',
-      category: 'choose',
-    });
   };
 
   const onDelete = async (id) => {
@@ -74,12 +67,23 @@ const UseMenu = (props) => {
       }
     }
   };
+
+  const ClearForm = () => {
+    this.setState({
+      isSubmitting: false,
+      id: '',
+      name: '',
+      price: '',
+      category: 'choose',
+    });
+  };
+
   return props.render({
-    name: newMenu.menuName,
-    menuList: menus,
-    handleDelete: onDelete,
-    isSubmitting: isSubmitting,
-    onSubmitting: setIsSubmitting,
+    newMenu,
+    menus,
+    isSubmitting,
+    setIsSubmitting,
+    onDelete,
     onSubmit,
     onChange,
   });

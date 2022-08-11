@@ -12,6 +12,8 @@ const AppNavigationPage = (props) => {
     } else {
       setIsActive(false);
       navigate('/', { replace: true });
+      props.handleHeader('')
+      window.alert('logout success')
     }
   };
   return props.render({

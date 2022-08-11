@@ -1,15 +1,9 @@
 import { USER_NAME_LABEL, USER_PASSWORD_LABEL } from '../../shared/constants';
 import './LoginView.css';
-import UseLogin from './UseLogin';
 
 export default function LoginView(props) {
-  const {
-    userCred,
-    userCredValidity,
-    buttonOn,
-    onChange,
-    onLogin,
-  } = UseLogin(props);
+  const { userCred, userCredValidity, onChange, onLogin, buttonOn } = props;
+
   return (
     <>
       <div

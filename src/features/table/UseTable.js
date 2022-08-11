@@ -3,7 +3,7 @@ import { table } from '../../model/table';
 import { useDeps } from '../../shared/api/DepsContext';
 import { WithLoading } from '../../shared/WithLoading';
 
-const Table = (props) => {
+const UseTable = (props) => {
   // const [id, setId] = useState('');
   // const [number, setNumber] = useState('');
   // const [status, setStatus] = useState('choose');
@@ -91,4 +91,4 @@ const Table = (props) => {
     onChange: onChange,
   });
 };
-export default WithLoading(Table);
+export default WithLoading(UseTable);
