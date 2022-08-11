@@ -4,7 +4,6 @@ import { addOrder, addFBMenu } from '../../state/TransactionAction';
 import { connect } from 'react-redux';
 import './OrderMenu.css';
 import { WithLoading } from '../../../../shared/WithLoading';
-import { WithDep } from '../../../../manager/dependencies/WithDep';
 
 class OrderMenu extends Component {
   constructor(props) {
@@ -130,7 +129,5 @@ const mapStateToProps = (state) => {
     menus: state.transactionReducer,
   };
 };
-export default WithDep(
-  connect(mapStateToProps, mapDispatchToProps)(WithLoading(OrderMenu)),
-  ['MenuService']
-);
+export default
+  connect(mapStateToProps, mapDispatchToProps)(WithLoading(OrderMenu))

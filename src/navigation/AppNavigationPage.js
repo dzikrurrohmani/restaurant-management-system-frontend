@@ -17,6 +17,7 @@ const AppNavigationPage = (props) => {
   return props.render({
     isActive: isActive,
     handleLog: handleLog,
+    handleHeader: props.handleHeader
   });
 };
 

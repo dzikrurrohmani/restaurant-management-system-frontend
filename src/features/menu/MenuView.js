@@ -86,9 +86,9 @@ const MenuView = (props) => {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{menu.id}</td>
-                    <td>{menu.name}</td>
-                    <td>{menu.price}</td>
+                    <td>{menu.menuId}</td>
+                    <td>{menu.menuName}</td>
+                    {/* <td>{menu.menuPrice}</td> */}
                     <td>
                       <button
                         type="button"

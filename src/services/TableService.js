@@ -1,37 +1,34 @@
-import { tables } from '../data';
+export const TableService = ({doGet, doPost, doDelete}) => {
 
-const TableService = () => {
-  const getTable = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(tables);
-      }, 2000);
-    });
-  };
+  const getAllTable = async () => {
+      try {
+          return await doGet({url: '/table'})
+      } catch (e) {
+          throw e
+      }
+  }
 
-  const addTable = async (newTable) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        tables.push(newTable);
-        resolve(newTable);
-      }, 1000);
-    });
-  };
+  const createTable = async (newPost) => {
+      try {
+          return await doPost({
+              url: '/table',
+              data: newPost
+          })
+      } catch (e) {
+          throw e
+      }
+  }
 
-  const deleteTable = async (id) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const index = tables.findIndex((table) => table.id === id);
-        tables.splice(index, 1);
-        resolve(index);
-      }, 1000);
-    });
-  };
-  return {
-    getTable,
-    addTable,
-    deleteTable,
-  };
-};
+  const deleteTableById = async (tableId) => {
+      try {
+          return await doDelete({
+              url : '/table',
+              data : tableId
+          })
+      } catch (error) {
+          
+      }
+  }
 
-export default TableService;
+  return {getAllTable, createTable, deleteTableById}
+}

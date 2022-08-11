@@ -1,3 +1,6 @@
+export const USER_NAME_LABEL='username'
+export const USER_PASSWORD_LABEL='password'
+
 export const LOGIN_ACTION_TYPE = {
     LOGIN: 'USER_LOGIN',
     LOGOUT: 'USER_LOGOUT'

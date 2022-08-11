@@ -1,7 +1,7 @@
 import { Outlet, useRoutes } from 'react-router-dom';
-import Menu from '../../features/menu/Menu';
+import Menu from '../../features/menu/UseMenu';
 import MenuView from '../../features/menu/MenuView';
-import Table from '../../features/table/Table';
+import Table from '../../features/table/UseTable';
 import TableView from '../../features/table/TableView';
 import TransactionView from '../../features/transaction/TransactionView';
 import Welcome from '../../features/welcome/Welcome';
@@ -17,15 +17,7 @@ const DashboardView = (props) => {
       element: (
         <div className="min-vh-100">
           <HeaderComponent handleLog={props.handleLog} />
-          <Outlet
-            style={{
-              position: 'absolut',
-              minHeight: '100vh',
-              width: '100%',
-              padding: '57px 0 25px 0',
-              zIndex: '101',
-            }}
-          />
+          <Outlet/>
           <FooterComponent />
         </div>
       ),
@@ -35,15 +27,15 @@ const DashboardView = (props) => {
           element: <BodyComponent view={<Welcome />} />,
         },
         {
-          path: 'menu',
+          path: 'menu/*',
           element: <BodyComponent view={<Menu render={MenuView} />} />,
         },
         {
-          path: 'table',
+          path: 'table/*',
           element: <BodyComponent view={<Table render={TableView} />} />,
         },
         {
-          path: 'transaction',
+          path: 'transaction/*',
           element: <BodyComponent view={<TransactionView />} />,
         },
       ],

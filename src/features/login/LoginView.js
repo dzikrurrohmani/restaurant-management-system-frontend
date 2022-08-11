@@ -1,7 +1,15 @@
+import { USER_NAME_LABEL, USER_PASSWORD_LABEL } from '../../shared/constants';
 import './LoginView.css';
+import UseLogin from './UseLogin';
 
 export default function LoginView(props) {
-  const { paswdInput, unameInput, unameValid, paswdValid, logChange, logSubmit, buttonOn } = props;
+  const {
+    userCred,
+    userCredValidity,
+    buttonOn,
+    onChange,
+    onLogin,
+  } = UseLogin(props);
   return (
     <>
       <div
@@ -21,13 +29,13 @@ export default function LoginView(props) {
             <input
               className="html_input"
               type="text"
-              name="unameInput"
+              name={USER_NAME_LABEL}
               id="username"
               placeholder="admin@example.com"
-              value={unameInput}
-              onChange={logChange}
+              value={userCred[USER_NAME_LABEL]}
+              onChange={onChange}
             />
-            {unameValid ? (
+            {userCredValidity[USER_NAME_LABEL] ? (
               <h4 style={{ color: 'bisque', fontSize: '10px' }}>1</h4>
             ) : (
               <p style={{ color: 'red', fontSize: '10px' }}>
@@ -41,13 +49,13 @@ export default function LoginView(props) {
             <input
               className="html_input"
               type="password"
-              name="paswdInput"
+              name={USER_PASSWORD_LABEL}
               id="password"
               placeholder="12345678"
-              value={paswdInput}
-              onChange={logChange}
+              value={userCred[USER_PASSWORD_LABEL]}
+              onChange={onChange}
             />
-            {paswdValid ? (
+            {userCredValidity[USER_PASSWORD_LABEL] ? (
               <p style={{ color: 'bisque', fontSize: '10px' }}>1</p>
             ) : (
               <p style={{ color: 'red', fontSize: '10px' }}>
@@ -58,8 +66,14 @@ export default function LoginView(props) {
           <button
             className="html_button"
             type="submit"
-            onClick={logSubmit}
-            disabled={unameValid && paswdValid && buttonOn ? false : true}
+            onClick={onLogin}
+            disabled={
+              userCredValidity[USER_NAME_LABEL] &&
+              userCredValidity[USER_PASSWORD_LABEL] &&
+              buttonOn
+                ? false
+                : true
+            }
           >
             Login
           </button>

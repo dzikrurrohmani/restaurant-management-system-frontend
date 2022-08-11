@@ -7,6 +7,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const HeaderComponent = (props) => {
+  console.log('HeaderComponent', props.handleLog);
   const navigate = useNavigate();
   return (
     <>

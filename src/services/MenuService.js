@@ -1,52 +1,34 @@
-import { menus } from '../data';
+export const MenuService = ({doGet, doPost, doDelete}) => {
 
-const MenuService = () => {
-  const getMenu = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(menus);
-      }, 2000);
-    });
-  };
+  const getAllMenu = async () => {
+      try {
+          return await doGet({url: '/menu'})
+      } catch (e) {
+          throw e
+      }
+  }
 
-  const getMenuByCategory = async (category) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const menuByCategory = [];
-        for (let menu of menus) {
-          if (menu.category === category) {
-            menuByCategory.push(menu);
-          }
-        }
-        resolve(menuByCategory);
-      }, 2000);
-    });
-  };
+  const createMenu = async (newPost) => {
+      try {
+          return await doPost({
+              url: '/menu',
+              data: newPost
+          })
+      } catch (e) {
+          throw e
+      }
+  }
 
-  const addMenu = async (newMenu) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        menus.push(newMenu);
-        resolve(newMenu);
-      }, 1000);
-    });
-  };
+  const deleteMenuById = async (menuId) => {
+      try {
+          return await doDelete({
+              url : '/menu',
+              data : menuId
+          })
+      } catch (error) {
+          
+      }
+  }
 
-  const deleteMenu = async (id) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const index = menus.findIndex((menu) => menu.id === id);
-        menus.splice(index, 1);
-        resolve(index);
-      }, 1000);
-    });
-  };
-  return {
-    getMenu,
-    addMenu,
-    deleteMenu,
-    getMenuByCategory,
-  };
-};
-
-export default MenuService;
+  return {getAllMenu, createMenu, deleteMenuById}
+}
