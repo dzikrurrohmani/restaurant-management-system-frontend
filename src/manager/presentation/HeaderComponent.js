@@ -4,9 +4,10 @@ import {
   Navbar as NavbarBS,
   NavDropdown,
 } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-export default function HeaderComponent(props) {
-  const { welcomeView, menuView, tableView, transactionView } = props;
+const HeaderComponent = (props) => {
+  const navigate = useNavigate();
   return (
     <>
       <NavbarBS
@@ -19,7 +20,7 @@ export default function HeaderComponent(props) {
           {/* <NavbarBS.Brand onClick={welcomeView}>
             WMB
           </NavbarBS.Brand> */}
-          <Nav.Link style={{ color: 'white' }} onClick={welcomeView}>
+          <Nav.Link style={{ color: 'white' }} onClick={() => navigate('/home')}>
             WMB (Warung Makan Bahari)
           </Nav.Link>
           <Container style={{ marginRight: 'initial', width: 'max-content' }}>
@@ -31,13 +32,13 @@ export default function HeaderComponent(props) {
             ></NavbarBS.Toggle>
             <NavbarBS.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link onClick={transactionView}>
+                <Nav.Link onClick={() => navigate('transaction')}>
                   &nbsp;&nbsp;Transaction&nbsp;&nbsp;
                 </Nav.Link>
-                <Nav.Link onClick={menuView}>
+                <Nav.Link onClick={() => navigate('menu')}>
                   &nbsp;&nbsp;Menu&nbsp;&nbsp;
                 </Nav.Link>
-                <Nav.Link onClick={tableView}>
+                <Nav.Link onClick={() => navigate('table')}>
                   &nbsp;&nbsp;Table&nbsp;&nbsp;
                 </Nav.Link>
                 <NavDropdown title=" &nbsp;&nbsp;Actions&nbsp;&nbsp;">
@@ -60,4 +61,6 @@ export default function HeaderComponent(props) {
       </NavbarBS>
     </>
   );
-}
+};
+
+export default HeaderComponent;

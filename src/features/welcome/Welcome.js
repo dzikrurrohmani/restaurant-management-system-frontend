@@ -1,4 +1,7 @@
-export default function Welcome(props) {
+import { useNavigate } from "react-router-dom";
+
+const Welcome = (props) => {
+  const navigate = useNavigate()
   return (
     <div style={{ paddingTop: '11%' }}>
       <h2>Welcome, Admin</h2>
@@ -10,10 +13,12 @@ export default function Welcome(props) {
           paddingTop: '10%',
         }}
       >
-        <button style={{width: '150px', height: '100px'}} onClick={props.menuView}>MENU MANAGEMENT</button>
-        <button style={{width: '150px', height: '100px'}} onClick={props.tableView}>TABLE MANAGEMENT</button>
-        <button style={{width: '150px', height: '100px'}} onClick={props.transactionView}>TRANSACTION MANAGEMENT</button>
+        <button style={{width: '150px', height: '100px'}} onClick={()=> navigate('menu')}>MENU MANAGEMENT</button>
+        <button style={{width: '150px', height: '100px'}} onClick={()=> navigate('table')}>TABLE MANAGEMENT</button>
+        <button style={{width: '150px', height: '100px'}} onClick={()=> navigate('transaction')}>TRANSACTION MANAGEMENT</button>
       </div>
     </div>
   );
 }
+
+export default Welcome

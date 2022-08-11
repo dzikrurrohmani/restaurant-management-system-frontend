@@ -17,7 +17,7 @@ const AppNavigationView = (props) => {
         />
         <Route element={isActive ? <Outlet /> : <Navigate to="/" replace />}>
           <Route
-            path="/home"
+            path="/home/*"
             element={<Dashboard render={DashboardView} handleLog={handleLog} />}
           />
         </Route>
