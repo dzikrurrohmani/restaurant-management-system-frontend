@@ -1,94 +1,130 @@
-import { Component, useState, useRef, useEffect } from 'react';
-import { table } from '../../model/table';
+import { useState, useEffect } from 'react';
 import { useDeps } from '../../shared/api/DepsContext';
 import { WithLoading } from '../../shared/WithLoading';
 
 const UseTable = (props) => {
-  // const [id, setId] = useState('');
-  // const [number, setNumber] = useState('');
-  // const [status, setStatus] = useState('choose');
-
   const { tableService } = useDeps();
-  const [newTable, setNewTable] = useState({ tableDescription: '' });
+  const [newTable, setNewTable] = useState({
+    tableId: '',
+    tableDescription: '',
+    tableAvailability: 'choose',
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [tables, setTables] = useState([]);
 
   useEffect(() => {
-    getAllTable();
-  }, []);
+    onGetAllTable();
+  }, [isSubmitting]);
 
   const onChange = (event) => {
     setNewTable({
       ...newTable,
-      [event.target.name]: event.target.value,
+      [event.target.name]:
+        event.target.type === 'number'
+          ? Number(event.target.value)
+          : event.target.value,
     });
   };
 
-  const getAllTable = async () => {
-    console.log('UseTablegetall1');
+  const onGetAllTable = async () => {
     props.onLoading(true);
     try {
+      console.log('masuk getall');
       const response = await tableService.getAllTable();
-      console.log('UseTablegetall2');
       setTables(response.data);
       props.onLoading(false);
-    } catch (e) {
-      console.log('UseTablegetall3', e.message);
+    } catch (error) {
       props.onLoading(false);
-      alert('Something went wrong..');
+      window.alert(error.message);
     }
   };
 
-  const onSubmit = async () => {
-    try {
-      this.props.onLoading(true);
-      const { id, number, status } = this.state;
-      await this.service.addTable(table(id, number, status[0].toUpperCase()));
-      this.props.onLoading(false);
-      alert(`Successfully add table..`);
-      // this.props.onCancelForm();
-    } catch (e) {
-      this.props.onLoading(false);
-      alert('Something went wrong..');
+  const onCreateTable = async () => {
+    if (
+      Number(newTable.tableId) &&
+      newTable.tableDescription &&
+      newTable.tableAvailability !== 'choose'
+    ) {
+      if (!tables.map((table) => table.tableId).includes(newTable.tableId)) {
+        props.onLoading(true);
+        try {
+          const payload = {
+            ...newTable,
+            tableAvailability:
+              newTable.tableAvailability === 'available' ? true : false,
+          };
+          const response = await tableService.createTable(payload);
+          props.onLoading(false);
+          alert(`Successfully add table with id ${response.data.tableId}`);
+          setIsSubmitting(false);
+        } catch (error) {
+          props.onLoading(false);
+          window.alert(error.message);
+        }
+      } else {
+        window.alert(`table with id ${newTable.tableId} is already exist`);
+      }
+    } else {
+      window.alert('please fill all required fielda');
     }
-    this.setState({
-      isSubmitting: false,
-      id: '',
-      status: 'choose',
-    });
   };
 
-  const onDelete = async (id) => {
-    const result = window.confirm('Are you sure want to delete ?');
+  const onDeleteTable = async (id) => {
+    const result = window.confirm(
+      `Are you sure want to delete table with id ${id}?`
+    );
     if (result) {
-      this.props.onLoading(true);
+      props.onLoading(true);
       try {
-        await this.service.deleteTable(id);
-        await this.getAllTable();
-        this.props.onLoading(false);
-      } catch (e) {
-        this.props.onLoading(false);
-        alert('Something went wrong..');
+        const response = await tableService.deleteTableById({
+          tableId: Number(id),
+        });
+        await onGetAllTable();
+        props.onLoading(false);
+        alert(`Successfully delete table with id ${response.data.tableId}`);
+      } catch (error) {
+        props.onLoading(false);
+        window.alert(error.message);
       }
     }
   };
 
-  const   onSubmitting = (value) => {
-    this.setState({
-      isSubmitting: value,
-      id: '',
-      number: '',
-      status: 'choose',
+  const onSubmitting = (value) => {
+    setNewTable({
+      tableId: '',
+      tableDescription: '',
+      tableAvailability: 'choose',
     });
+    setIsSubmitting(value);
   };
 
   return props.render({
-    tableList: tables,
-    handleDelete: onDelete,
-    isSubmitting: isSubmitting,
-    onSubmitting: onSubmitting,
-    onSubmit: onSubmit,
-    onChange: onChange,
+    newTable,
+    tables,
+    isSubmitting,
+    onSubmitting,
+    onDeleteTable,
+    onCreateTable,
+    onChange,
   });
 };
 export default WithLoading(UseTable);
+
+// const onSubmit = async () => {
+//   try {
+//     this.props.onLoading(true);
+//     const { id, number, status } = this.state;
+//     await this.service.addTable(table(id, number, status[0].toUpperCase()));
+//     this.props.onLoading(false);
+//     alert(`Successfully add table..`);
+//     // this.props.onCancelForm();
+//   } catch (e) {
+//     this.props.onLoading(false);
+//     alert('Something went wrong..');
+//   }
+//   this.setState({
+//     isSubmitting: false,
+//     id: '',
+//     status: 'choose',
+//   });
+// };

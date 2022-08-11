@@ -6,29 +6,31 @@ const MenuView = (props) => {
     newMenu,
     menus,
     isSubmitting,
-    setIsSubmitting,
-    onDelete,
-    onSubmit,
+    onSubmitting,
+    onDeleteMenu,
+    onCreateMenu,
     onChange,
   } = props;
   if (isSubmitting) {
     return (
       <div className="container-lg">
+        <br/>
         <h1>Form Add Menu</h1>
         <div style={{width: '60%', marginLeft: '20%'}}>
           <div>
           <InputForm
+            type="number"
             label="Menu ID"
             value={newMenu.menuId}
             placeholder="masukkan id"
-            id="menuId"
+            name="menuId"
             onChange={onChange}
           />
           <InputForm
             label="Menu Name"
             value={newMenu.menuName}
             placeholder="masukkan nama"
-            id="menuName"
+            name="menuName"
             onChange={onChange}
           />
           <InputForm
@@ -36,25 +38,25 @@ const MenuView = (props) => {
             type="number"
             value={newMenu.menuPrice}
             placeholder="masukkan price"
-            id="menuPrice"
+            name="menuPrice"
             onChange={onChange}
           />
           <DropDownList
             label="Category"
-            values={[newMenu.menuCategory, 'Food', 'Beverages']}
+            values={['choose', 'Food', 'Beverages']}
             onChange={onChange}
             name="menuCategory"
             value={newMenu.menuCategory}
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
-          <button type="button" className="btn btn-warning" onClick={onSubmit}>
+          <button type="button" className="btn btn-warning" onClick={onCreateMenu}>
             Submit
           </button>
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => setIsSubmitting(false)}
+            onClick={() => onSubmitting(false)}
           >
             Cancel
           </button>
@@ -73,7 +75,7 @@ const MenuView = (props) => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => setIsSubmitting(true)}
+            onClick={() => onSubmitting(true)}
           >
             Add Menu
           </button>
@@ -100,7 +102,7 @@ const MenuView = (props) => {
                         type="button"
                         className="btn btn-danger"
                         onClick={() => {
-                          onDelete(newMenu.menuId);
+                          onDeleteMenu(menu.menuId);
                         }}
                       >
                         Delete
