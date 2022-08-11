@@ -10,7 +10,6 @@ import FooterComponent from './FooterComponent';
 import HeaderComponent from './HeaderComponent';
 
 const DashboardView = (props) => {
-  console.log('DashboardView', props.handleLog);
   let routes = useRoutes([
     {
       path: '/',

@@ -8,7 +8,7 @@ import { WithLoading } from '../../../../shared/WithLoading';
 class OrderMenu extends Component {
   constructor(props) {
     super(props);
-    this.service = props.MenuService;
+    this.service = props.service;
     this.state = {
       menuList: [],
       isShowingForm: false,
@@ -16,11 +16,32 @@ class OrderMenu extends Component {
     };
   }
 
+  getMenuByCategory = async (category) => {
+    const menuByCategory = [];
+    this.props.onLoading(true);
+    try {
+      console.log('masuk getall');
+      const response = await this.service.getAllMenu();
+      for (let menu of response.data) {
+        if (menu.menuCategory === category) {
+          menuByCategory.push(menu);
+        }
+      }
+      this.props.onLoading(false);
+    } catch (error) {
+      this.props.onLoading(false);
+      window.alert(error.message);
+    } finally {
+      return menuByCategory;
+    }
+
+  };
+
   onGetMenus = async () => {
     this.props.onLoading(true);
     try {
-      const foods = await this.service.getMenuByCategory('food');
-      const beverages = await this.service.getMenuByCategory('beverage');
+      const foods = await this.getMenuByCategory('food');
+      const beverages = await this.getMenuByCategory('beverage');
       this.props.addFBMenu(foods, beverages);
       this.props.onLoading(false);
       this.handleGetFoodMenu('food');
@@ -93,9 +114,9 @@ class OrderMenu extends Component {
                 <div
                   className="menu-item app-color"
                   onClick={() => this.handleShowingForm(f)}
-                  key={f.id}
+                  key={f.menuId}
                 >
-                  {f.name}
+                  {f.menuName}
                 </div>
               );
             })}
@@ -129,5 +150,7 @@ const mapStateToProps = (state) => {
     menus: state.transactionReducer,
   };
 };
-export default
-  connect(mapStateToProps, mapDispatchToProps)(WithLoading(OrderMenu))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithLoading(OrderMenu));

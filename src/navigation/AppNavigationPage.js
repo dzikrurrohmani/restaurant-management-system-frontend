@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LocalStorageHelper from '../shared/api/LocalStorageHelper';
 
 const AppNavigationPage = (props) => {
   const navigate = useNavigate();
@@ -12,14 +13,15 @@ const AppNavigationPage = (props) => {
     } else {
       setIsActive(false);
       navigate('/', { replace: true });
-      props.handleHeader('')
-      window.alert('logout success')
+      props.handleHeader('');
+      window.alert('logout success');
+      LocalStorageHelper().onClearItemLocalStorage();
     }
   };
   return props.render({
     isActive: isActive,
     handleLog: handleLog,
-    handleHeader: props.handleHeader
+    handleHeader: props.handleHeader,
   });
 };
 

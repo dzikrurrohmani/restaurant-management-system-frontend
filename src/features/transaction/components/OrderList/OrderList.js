@@ -32,7 +32,7 @@ export class OrderList extends Component {
               <div>
                 {item.qty} {item.menu.name}
               </div>
-              <div>{item.menu.price * item.qty}</div>
+              <div>{item.menu.menuPrice * item.qty}</div>
             </div>
           );
         })}

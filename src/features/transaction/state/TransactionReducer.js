@@ -16,7 +16,7 @@ export function transactionReducer(state = transactionInitialState, action) {
       const newOrderItems = [...state.orderItems, orderItem];
       let total = 0;
       for (let order of newOrderItems) {
-        total = total + order.qty * order.menu.price;
+        total = total + order.qty * Number(order.menu.menuPrice);
       }
       return {
         ...transactionInitialState,
