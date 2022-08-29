@@ -9,6 +9,7 @@
     flex-direction: column;
     flex-basis: 25%;
     padding: 8px;
+    background-color: white;
 }
 
 .order-menu-list-container {

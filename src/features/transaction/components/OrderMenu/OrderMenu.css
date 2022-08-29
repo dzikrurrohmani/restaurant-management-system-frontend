@@ -25,7 +25,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: 100%;
-    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
 }
 
 .menu-header{

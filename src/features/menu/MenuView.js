@@ -43,7 +43,7 @@ const MenuView = (props) => {
           />
           <DropDownList
             label="Category"
-            values={['choose', 'Food', 'Beverages']}
+            values={['choose', 'Food', 'Beverage']}
             onChange={onChange}
             name="menuCategory"
             value={newMenu.menuCategory}

@@ -30,7 +30,7 @@ export class OrderList extends Component {
           return (
             <div key={index} className='order-item app-color'>
               <div>
-                {item.qty} {item.menu.name}
+                {item.qty} x {item.menu.menuName}
               </div>
               <div>{item.menu.menuPrice * item.qty}</div>
             </div>
