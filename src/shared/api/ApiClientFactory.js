@@ -2,7 +2,7 @@ export const ApiClientFactory = (client) => {
   const doPost = async ({ url = '', data = null }) => {
     try {
       const response = await client.post(url, data);
-      if (url === '/login') {
+      if (url === 'login') {
         return response.data
       }
       if (response.data.responseCode === '00') {
