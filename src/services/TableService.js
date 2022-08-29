@@ -1,7 +1,7 @@
 export const TableService = ({ doGet, doPost, doDelete }) => {
     const getAllTable = async () => {
       try {
-        return await doGet({ url: '/table' });
+        return await doGet({ url: 'table' });
       } catch (error) {
         throw error;
       }
@@ -10,7 +10,7 @@ export const TableService = ({ doGet, doPost, doDelete }) => {
     const createTable = async (newPost) => {
       try {
         return await doPost({
-          url: '/table',
+          url: 'table',
           data: newPost,
         });
       } catch (error) {
@@ -22,7 +22,7 @@ export const TableService = ({ doGet, doPost, doDelete }) => {
       console.log(tableId);
       try {
         return await doDelete({
-          url: '/table',
+          url: 'table',
           data: tableId,
         });
       } catch (error) {

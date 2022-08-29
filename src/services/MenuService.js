@@ -1,7 +1,7 @@
 export const MenuService = ({ doGet, doPost, doDelete }) => {
   const getAllMenu = async () => {
     try {
-      return await doGet({ url: '/menu' });
+      return await doGet({ url: 'menu' });
     } catch (error) {
       throw error;
     }
@@ -10,7 +10,7 @@ export const MenuService = ({ doGet, doPost, doDelete }) => {
   const createMenu = async (newPost) => {
     try {
       return await doPost({
-        url: '/menu',
+        url: 'menu',
         data: newPost,
       });
     } catch (error) {
@@ -22,7 +22,7 @@ export const MenuService = ({ doGet, doPost, doDelete }) => {
     console.log(menuId);
     try {
       return await doDelete({
-        url: '/menu',
+        url: 'menu',
         data: menuId,
       });
     } catch (error) {

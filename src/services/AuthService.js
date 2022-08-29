@@ -1,7 +1,7 @@
 export const AuthenticationService = ({ doDelete, doPost }) => {
   const doLogout = async () => {
     try {
-      return await doDelete({ url: '/login' });
+      return await doDelete({ url: 'login' });
     } catch (error) {
       throw error;
     }
@@ -10,7 +10,7 @@ export const AuthenticationService = ({ doDelete, doPost }) => {
   const doLogin = async (userCred) => {
     try {
       return await doPost({
-        url: '/login',
+        url: 'login',
         data: userCred,
       });
     } catch (error) {
